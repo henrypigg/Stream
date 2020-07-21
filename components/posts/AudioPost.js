@@ -11,6 +11,19 @@ import artists from "../../data/artists";
 import AudioRateButton from "./AudioRateButton";
 
 class AudioPost extends React.Component {
+  constructor() {
+    super();
+
+    this.state = {
+      locked: true,
+    };
+  }
+
+  unlock = () => {
+    this.setState({ locked: false });
+    console.log(this.state.locked);
+  };
+
   render() {
     return (
       <Container>
@@ -46,8 +59,11 @@ class AudioPost extends React.Component {
             </Info>
           </Post>
         </PostWrapper>
-        <AudioRateButton />
+        <AudioRateButton unlock={this.unlock} />
         <FooterWrapper>
+          <LockedOverlay locked={this.state.locked}>
+            <CommentsDisabled>Comments Disabled until Rated</CommentsDisabled>
+          </LockedOverlay>
           <Comments>
             <ShowAll>Show all {this.props.post.comments} comments</ShowAll>
             <Comment>
@@ -206,4 +222,20 @@ const Length = styled.Text`
   position: absolute;
   right: 20px;
   color: #f1f1f1;
+`;
+
+const LockedOverlay = styled.View`
+  background-color: ${colorTheme.bg};
+  z-index: 2;
+  width: 100%;
+  height: ${(props) => (props.locked ? "100%" : "0px")};
+  position: absolute;
+  padding-top: 10px;
+  align-items: center;
+`;
+
+const CommentsDisabled = styled.Text`
+  color: ${colorTheme.mainContent};
+  font-weight: 100;
+  font-size: 16px;
 `;

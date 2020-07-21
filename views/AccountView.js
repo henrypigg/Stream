@@ -9,6 +9,7 @@ import ArtistInfo from "../components/ArtistInfo";
 import ArtistTabBar from "../components/ArtistTabBar";
 import ImagePost from "../components/posts/ImagePost";
 import VideoPost from "../components/posts/VideoPost";
+import AudioPost from "../components/posts/AudioPost";
 import colorTheme from "../data/colorTheme";
 
 const MIN_BG_HEIGHT = 280;
@@ -108,14 +109,30 @@ class AccountView extends React.Component {
               lit **!++
             </Bio>
             <ArtistTabBar />
-            {artist.posts.map((post, index) => (
-              <VideoPost
-                key={index}
-                post={post}
-                artist={artist}
-                navigation={this.props.navigation}
-              />
-            ))}
+            {artist.posts.map((post, index) =>
+              post.type == "image" ? (
+                <ImagePost
+                  key={index}
+                  post={post}
+                  artist={post.artist}
+                  navigation={this.props.navigation}
+                />
+              ) : post.type == "video" ? (
+                <VideoPost
+                  key={index}
+                  post={post}
+                  artist={post.artist}
+                  navigation={this.props.navigation}
+                />
+              ) : (
+                <AudioPost
+                  key={index}
+                  post={post}
+                  artist={post.artist}
+                  navigation={this.props.navigation}
+                />
+              )
+            )}
           </Content>
         </ScrollView>
       </Container>

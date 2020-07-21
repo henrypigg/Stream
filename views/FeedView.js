@@ -52,6 +52,37 @@ class FeedView extends React.Component {
     headerLeft: <MessageButton />,
   };
 
+  PostType = (props) => {
+    if (props.post.type == "image") {
+      return (
+        <ImagePost
+          key={index}
+          post={post}
+          artist={post.artist}
+          navigation={this.props.navigation}
+        />
+      );
+    } else if (props.post.type == "video") {
+      return (
+        <VideoPost
+          key={index}
+          post={post}
+          artist={post.artist}
+          navigation={this.props.navigation}
+        />
+      );
+    } else if (props.post.type == "audio") {
+      return (
+        <AudioPost
+          key={index}
+          post={post}
+          artist={post.artist}
+          navigation={this.props.navigation}
+        />
+      );
+    }
+  };
+
   _onRefresh() {
     this.setState({ refreshing: true });
     shuffleArray(postArray);
@@ -73,14 +104,30 @@ class FeedView extends React.Component {
           }
         >
           <Content>
-            {postArray.map((post, index) => (
-              <AudioPost
-                key={index}
-                post={post}
-                artist={post.artist}
-                navigation={this.props.navigation}
-              />
-            ))}
+            {postArray.map((post, index) =>
+              post.type == "image" ? (
+                <ImagePost
+                  key={index}
+                  post={post}
+                  artist={post.artist}
+                  navigation={this.props.navigation}
+                />
+              ) : post.type == "video" ? (
+                <VideoPost
+                  key={index}
+                  post={post}
+                  artist={post.artist}
+                  navigation={this.props.navigation}
+                />
+              ) : (
+                <AudioPost
+                  key={index}
+                  post={post}
+                  artist={post.artist}
+                  navigation={this.props.navigation}
+                />
+              )
+            )}
           </Content>
         </ScrollView>
       </Container>
