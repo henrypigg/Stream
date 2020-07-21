@@ -9,7 +9,9 @@ const ArtistTabBar = (props) => (
       <All>All</All>
       <Underline />
     </AllWrapper>
-    <Exclusive>Exclusive</Exclusive>
+    <TouchableOpacity>
+      <Exclusive>Exclusive</Exclusive>
+    </TouchableOpacity>
   </Container>
 );
 

@@ -2,22 +2,84 @@ import React from "react";
 import styled from "styled-components";
 import MessageButton from "../components/MessageButton";
 import ImagePost from "../components/posts/ImagePost";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, FlatList } from "react-native-gesture-handler";
+import colorTheme from "../data/colorTheme";
+import posts from "../data/posts";
+import { RefreshControl, ListView } from "react-native";
+import Constants from "expo-constants";
+import VideoPost from "../components/posts/VideoPost";
+import AudioPost from "../components/posts/AudioPost";
+
+const postArray = posts;
+
+const wait = (timeout) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+};
+
+function shuffleArray(array) {
+  var i, j, temp;
+  for (i = array.length - 1; i > 0; i--) {
+    j = Math.floor(Math.random() * (i + 1));
+    temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
 
 class FeedView extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      refreshing: false,
+    };
+  }
+
   static navigationOptions = {
     title: "Subscribed",
-    headerTintColor: "#1075b7",
+    headerStyle: {
+      shadowColor: "transparent",
+      height: 100,
+      backgroundColor: colorTheme.bg,
+    },
+    headerTitleStyle: {
+      fontSize: "24",
+      fontWeight: "800",
+      color: colorTheme.mainContent,
+    },
     headerLeft: <MessageButton />,
   };
+
+  _onRefresh() {
+    this.setState({ refreshing: true });
+    shuffleArray(postArray);
+    this.setState({ refreshing: false });
+  }
 
   render() {
     return (
       <Container>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          decelerationRate={0}
+          snapToInterval={540}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}
+            />
+          }
+        >
           <Content>
-            {posts.map((post, index) => (
-              <ImagePost key={index} post={post} />
+            {postArray.map((post, index) => (
+              <AudioPost
+                key={index}
+                post={post}
+                artist={post.artist}
+                navigation={this.props.navigation}
+              />
             ))}
           </Content>
         </ScrollView>
@@ -35,71 +97,9 @@ const Wrapper = styled.View`
 const Container = styled.View`
   flex: 1;
   width: 100%;
+  background-color: ${colorTheme.bg};
 `;
 
 const Content = styled.View`
   width: 100%;
 `;
-
-const posts = [
-  {
-    name: "Playboi Carti",
-    avatar: require("../assets/ProfileFiller/PlayboiCarti.png"),
-    online: 3,
-    image: require("../assets/ProfileFiller/PlayboiCarti2.png"),
-    caption: ".opium <3 /",
-    comments: 4275,
-    firstComment: "Drop!!!",
-    secondComment: "album?",
-    firstUser: "dakotacilenti",
-    secondUser: "yaboifran",
-  },
-  {
-    name: "Playboi Carti",
-    avatar: require("../assets/ProfileFiller/PlayboiCarti.png"),
-    online: 3,
-    image: require("../assets/ProfileFiller/PlayboiCarti2.png"),
-    caption: ".opium <3 /",
-    comments: 4275,
-    firstComment: "Drop!!!",
-    secondComment: "album?",
-    firstUser: "dakotacilenti",
-    secondUser: "yaboifran",
-  },
-  {
-    name: "Playboi Carti",
-    avatar: require("../assets/ProfileFiller/PlayboiCarti.png"),
-    online: 3,
-    image: require("../assets/ProfileFiller/PlayboiCarti2.png"),
-    caption: ".opium <3 /",
-    comments: 4275,
-    firstComment: "Drop!!!",
-    secondComment: "album?",
-    firstUser: "dakotacilenti",
-    secondUser: "yaboifran",
-  },
-  {
-    name: "Playboi Carti",
-    avatar: require("../assets/ProfileFiller/PlayboiCarti.png"),
-    online: 3,
-    image: require("../assets/ProfileFiller/PlayboiCarti2.png"),
-    caption: ".opium <3 /",
-    comments: 4275,
-    firstComment: "Drop!!!",
-    secondComment: "album?",
-    firstUser: "dakotacilenti",
-    secondUser: "yaboifran",
-  },
-  {
-    name: "Playboi Carti",
-    avatar: require("../assets/ProfileFiller/PlayboiCarti.png"),
-    online: 3,
-    image: require("../assets/ProfileFiller/PlayboiCarti2.png"),
-    caption: ".opium <3 /",
-    comments: 4275,
-    firstComment: "Drop!!!",
-    secondComment: "album?",
-    firstUser: "dakotacilenti",
-    secondUser: "yaboifran",
-  },
-];

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Text } from "react-native";
+import { color } from "react-native-reanimated";
+import colorTheme from "../data/colorTheme";
 
 const FollowSubscribeContainer = (props) => (
   <Container>
@@ -34,7 +36,8 @@ const FollowButtonContainer = styled.View`
   border-radius: 15px;
   margin-right: ${(props) => (props.following ? "3%" : "0")};
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-  background-color: ${(props) => (props.following ? "#ffffff" : "#1075b7")};
+  background-color: ${(props) =>
+    props.following ? colorTheme.accentGray : colorTheme.accent};
   align-items: center;
   justify-content: center;
 `;
@@ -50,11 +53,14 @@ const SubscribeButtonContainer = styled.View`
 `;
 
 const FollowText = styled.Text`
-  color: ${(props) => (props.following ? "#1b1b1b" : "#ffffff")};
+  color: ${(props) =>
+    props.following ? colorTheme.mainContent : colorTheme.mainContent};
   font-size: 16px;
+  font-weight: 300;
 `;
 
 const SubscribeText = styled.Text`
   color: white;
   font-size: 16px;
+  font-weight: 200;
 `;

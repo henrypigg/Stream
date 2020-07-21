@@ -17,15 +17,27 @@ import ProfileBackground from "../components/ProfileBackground";
 import ProfileTabBar from "../components/ProfileTabBar";
 import FavSongs from "../components/FavSongs";
 import { connect } from "react-redux";
+import artists from "../data/artists";
+import colorTheme from "../data/colorTheme";
+import { color } from "react-native-reanimated";
 
 function clamp(num, min, max) {
   return num <= min ? min : num >= max ? max : num;
 }
 
 const MIN_BG_HEIGHT = 280;
+const MAX_BG_HEIGHT = 1000;
+const BG_SCROLL_DISTANCE = MIN_BG_HEIGHT - MAX_BG_HEIGHT;
+
 const MIN_PROFILE_HEIGHT = 162;
 const MAX_PROFILE_HEIGHT = 250;
-const PROFILE_SCROLL_DISTANCE = MAX_PROFILE_HEIGHT - MIN_PROFILE_HEIGHT;
+const PROFILE_SCROLL_DISTANCE = (MIN_PROFILE_HEIGHT - MAX_PROFILE_HEIGHT) * 4;
+
+const MIN_PROFILE_MARGIN = 290 - MAX_PROFILE_HEIGHT;
+const MAX_PROFILE_MARGIN = 290 - MIN_PROFILE_HEIGHT;
+
+const MIN_USERNAME_MARGIN = 60;
+const MAX_USERNAME_MARGIN = 144;
 
 class ProfileView extends React.Component {
   constructor(props) {
@@ -42,18 +54,45 @@ class ProfileView extends React.Component {
 
   render() {
     const profileHeight = this.state.scrollY.interpolate({
-      inputRange: [0, PROFILE_SCROLL_DISTANCE],
+      inputRange: [PROFILE_SCROLL_DISTANCE, 0],
       outputRange: [MAX_PROFILE_HEIGHT, MIN_PROFILE_HEIGHT],
+      extrapolate: "clamp",
+    });
+
+    const BGHeight = this.state.scrollY.interpolate({
+      inputRange: [BG_SCROLL_DISTANCE, 0],
+      outputRange: [MAX_BG_HEIGHT, MIN_BG_HEIGHT],
+      extrapolate: "clamp",
+    });
+
+    const profileTopMargin = this.state.scrollY.interpolate({
+      inputRange: [PROFILE_SCROLL_DISTANCE, 0],
+      outputRange: [MIN_PROFILE_MARGIN, MAX_PROFILE_MARGIN],
+      extrapolate: "clamp",
+    });
+
+    const usernameTopMargin = this.state.scrollY.interpolate({
+      inputRange: [PROFILE_SCROLL_DISTANCE, 0],
+      outputRange: [MAX_USERNAME_MARGIN, MIN_USERNAME_MARGIN],
       extrapolate: "clamp",
     });
 
     return (
       <Container>
-        <BackgroundWrapper>
+        <AnimatedContainer style={{ height: BGHeight }}>
           <ProfileBackground
-            gradient={require("../assets/ProfileFiller/Gradient1.png")}
+            gradient={require("../assets/gradients/Gradient6.png")}
           />
-        </BackgroundWrapper>
+        </AnimatedContainer>
+        <Wrapper>
+          <AnimatedUsername
+            style={{
+              marginTop: usernameTopMargin,
+            }}
+          >
+            henrypigg
+          </AnimatedUsername>
+        </Wrapper>
         <ScrollView
           showsVerticalScrollIndicator={false}
           scrollEventThrottle={16}
@@ -61,27 +100,41 @@ class ProfileView extends React.Component {
             { nativeEvent: { contentOffset: { y: this.state.scrollY } } },
           ])}
         >
-          <Wrapper>
-            <Username
+          <PhotoContainer>
+            <AnimatedWrapper
               style={{
-                marginTop: 70,
+                width: profileHeight,
+                height: profileHeight,
+                borderRadius: profileHeight,
+                marginTop: profileTopMargin,
               }}
             >
-              henrypigg
-            </Username>
-          </Wrapper>
-          <ProfilePhoto size={162} />
+              <ProfilePhoto />
+            </AnimatedWrapper>
+          </PhotoContainer>
           <Content
             style={{
-              marginTop: 140,
+              marginTop: 250,
             }}
           >
             <FollowersAndFollowing />
             <EditProfileButton />
             <ProfileTabBar />
-            <FavArtists artists={artists} navigation={this.props.navigation} />
-            <FavAlbums albums={albums} navigation={this.props.navigation} />
-            <FavSongs songs={songs} navigation={this.props.navigation} />
+            <MyMusic>
+              <FavArtists
+                artists={favoriteArtists}
+                navigation={this.props.navigation}
+              />
+              <FavAlbums
+                albums={favoriteAlbums}
+                navigation={this.props.navigation}
+              />
+              <FavSongs
+                songs={favoriteSongs}
+                navigation={this.props.navigation}
+              />
+            </MyMusic>
+            <Reposts></Reposts>
           </Content>
         </ScrollView>
       </Container>
@@ -91,101 +144,124 @@ class ProfileView extends React.Component {
 
 export default ProfileView;
 
+const MyMusic = styled.View``;
+
+const Reposts = styled.View``;
+
 const BackgroundWrapper = styled.View`
   width: 100%;
-  height: 280;
   position: absolute;
 `;
 
+const AnimatedContainer = Animated.createAnimatedComponent(BackgroundWrapper);
+
 const Container = styled.View`
   flex: 1;
+  background-color: ${colorTheme.bg};
 `;
 
 const Wrapper = styled.View`
   align-items: center;
 `;
 
+const PhotoContainer = styled.View`
+  flex: 1;
+  width: 100%;
+  z-index: 1;
+  align-items: center;
+  position: absolute;
+`;
+
+const PhotoWrapper = styled.View`
+  overflow: hidden;
+  background-color: ${colorTheme.bg};
+`;
+
+const AnimatedWrapper = Animated.createAnimatedComponent(PhotoWrapper);
+
 const Username = styled.Text`
   font-size: 36px;
   font-weight: 800;
   color: white;
+  position: absolute;
 `;
+
+const AnimatedUsername = Animated.createAnimatedComponent(Username);
 
 const Content = styled.View`
   width: 100%;
   border-top-right-radius: 30px;
   border-top-left-radius: 30px;
-  background-color: #f8f8f8;
+  background-color: ${colorTheme.bg};
 `;
 
-const artists = [
+const favoriteArtists = [
   {
-    name: "A Boogie Wit da Hoodie",
-    image: require("../assets/ProfileFiller/Aboogie.png"),
+    name: artists.ABoogie,
   },
   {
-    name: "Polo G",
-    image: require("../assets/ProfileFiller/poloG.png"),
+    name: artists.PoloG,
   },
   {
-    name: "Lil Tjay",
-    image: require("../assets/ProfileFiller/lilTjay.png"),
+    name: artists.LilTjay,
   },
   {
-    name: "Kanye West",
-    image: require("../assets/ProfileFiller/KanyeWest.png"),
+    name: artists.KanyeWest,
+  },
+  {
+    name: artists.PlayboiCarti,
+  },
+  {
+    name: artists.JuiceWRLD,
+  },
+  {
+    name: artists.CardiB,
   },
 ];
 
-const albums = [
+const favoriteAlbums = [
   {
     title: "Kids See Ghosts",
     image: require("../assets/ProfileFiller/KidsSeeGhosts.png"),
     artists: [
       {
-        avatar: require("../assets/ProfileFiller/KidCudi.png"),
-        name: "Kid Cudi",
+        name: artists.KidCudi,
       },
       {
-        avatar: require("../assets/ProfileFiller/KanyeWest.png"),
-        name: "Kanye West",
+        name: artists.KanyeWest,
       },
     ],
   },
   {
-    title: "Poop Rap",
+    title: "Acid Rap",
     image: require("../assets/ProfileFiller/AcidRap.png"),
     artists: [
       {
-        avatar: require("../assets/ProfileFiller/ChanceTheRapper.png"),
-        name: "Chance the Rapper",
+        name: artists.ChanceTheRapper,
       },
     ],
   },
 ];
 
-const songs = [
+const favoriteSongs = [
   {
     title: "Nothin' at All",
     image: require("../assets/ProfileFiller/AmerikkasMostBlunted.png"),
     artists: [
       {
-        avatar: require("../assets/ProfileFiller/Trizz.png"),
-        name: "Trizz",
+        name: artists.Trizz,
       },
       {
-        avatar: require("../assets/ProfileFiller/Chuuwee.png"),
-        name: "Chuuwee",
+        name: artists.Chuuwee,
       },
     ],
   },
   {
-    title: "Walking on a Dream",
-    image: require("../assets/ProfileFiller/WalkingOnADream.png"),
+    title: "Pain 1993",
+    image: require("../assets/ProfileFiller/Pain1993.png"),
     artists: [
       {
-        avatar: require("../assets/ProfileFiller/EmpireOfTheSun.png"),
-        name: "Empire of the Sun",
+        name: artists.PlayboiCarti,
       },
     ],
   },

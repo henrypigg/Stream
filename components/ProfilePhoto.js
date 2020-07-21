@@ -1,26 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
-import { TouchableOpacity } from "react-native";
-import Avatar from "./Avatar";
+import { TouchableOpacity, Animated } from "react-native";
+import colorTheme from "../data/colorTheme";
 
-const ProfilePhoto = (props) => (
-  <Container
-    style={{
-      height: props.size,
-      marginTop: 140,
-    }}
-  >
-    <Background
-      style={{
-        width: props.size,
-        borderRadius: props.size / 2,
-      }}
-    >
-      <Avatar
-        image={require("../assets/ProfileFiller/ProfilePhoto.png")}
-        size={props.size - 30}
-      />
+const ProfilePhoto = () => (
+  <Container>
+    <Background>
+      <Avatar source={require("../assets/ProfileFiller/ProfilePhoto.png")} />
     </Background>
   </Container>
 );
@@ -29,14 +16,21 @@ export default ProfilePhoto;
 
 const Container = styled.View`
   width: 100%;
+  height: 100%;
   z-index: 1;
-  position: absolute;
   align-items: center;
 `;
 
 const Background = styled.View`
+  width: 100%;
   height: 100%;
-  background-color: #f8f8f8;
+  background-color: ${colorTheme.bg};
   align-items: center;
   justify-content: center;
+`;
+
+const Avatar = styled.Image`
+  height: 90%;
+  width: 90%;
+  border-radius: 250px;
 `;

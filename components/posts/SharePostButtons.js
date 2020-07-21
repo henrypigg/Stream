@@ -3,17 +3,22 @@ import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import { View, ScrollView, TouchableOpacity } from "react-native";
 import Avatar from "../Avatar";
+import colorTheme from "../../data/colorTheme";
 
 const SharePostButtons = (props) => (
   <Container>
     <LikeButton>
-      <Ionicons name={"ios-heart"} size={86} color={"#cbcbcb"} />
+      <Ionicons name={"ios-heart"} size={36} color={colorTheme.mainContent} />
     </LikeButton>
     <RepostButton>
-      <Ionicons name={"ios-repeat"} size={86} color={"#cbcbcb"} />
+      <Ionicons name={"ios-repeat"} size={48} color={colorTheme.mainContent} />
     </RepostButton>
     <ShareButton>
-      <Ionicons name={"ios-share-alt"} size={86} color={"#cbcbcb"} />
+      <Ionicons
+        name={"ios-share-alt"}
+        size={36}
+        color={colorTheme.mainContent}
+      />
     </ShareButton>
   </Container>
 );
@@ -21,48 +26,32 @@ const SharePostButtons = (props) => (
 export default SharePostButtons;
 
 const Container = styled.View`
-  height: 100px;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  height: 100%;
   flex: 1;
-  flex-direction: row;
-  justify-content: center;
+  width: 15%;
+  align-items: center;
+  justify-content: flex-end;
 `;
 
 const LikeButton = styled.View`
-  background-color: white;
-  border-radius: 15px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-  margin-left: 5%;
-  width: 27%;
-  height: 100%;
-  padding-top: 10px;
+  width: 100%;
+  height: 36px;
   align-items: center;
+  margin-bottom: 10px;
   justify-content: center;
 `;
 
 const RepostButton = styled.View`
-  background-color: white;
-  border-radius: 15px;
-  margin-left: 5%;
-  padding-top: 10px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-  width: 27%;
-  height: 100%;
+  width: 100%;
+  height: 36px;
+  margin-bottom: 20px;
   align-items: center;
   justify-content: center;
 `;
 
 const ShareButton = styled.View`
-  background-color: white;
-  border-radius: 15px;
-  margin-left: 5%;
-  padding-top: 5px;
-  margin-right: 5%;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-  width: 27%;
-  height: 100%;
+  width: 100%;
+  height: 36px;
   align-items: center;
   justify-content: center;
 `;

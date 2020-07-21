@@ -18,11 +18,11 @@ export default ReleaseFilter;
 const Container = styled.View``;
 
 const CollapsedView = styled.View`
-  background: white;
-  height: ${(props) => (props.expanded ? 250 : 60)};
+  height: ${(props) => (props.expanded ? "250px" : "60px")};
   margin: 5%;
-  width: 90%;
   border-radius: 15px;
+  border: 1px solid #1075b7;
+  width: 90%;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
   align-items: center;
   justify-content: flex-start;

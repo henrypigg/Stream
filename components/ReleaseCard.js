@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { TouchableOpacity, Button } from "react-native";
 import NotificationButton from "./NotificationButton";
 import Avatar from "./Avatar";
+import ShareButton from "./ShareButton";
+import colorTheme from "../data/colorTheme";
 
 class ReleaseCard extends React.Component {
   render() {
@@ -10,27 +12,30 @@ class ReleaseCard extends React.Component {
       <Container>
         <TouchableOpacity>
           <Cover>
-            <Art source={this.props.art} />
+            <Art source={this.props.release.art} />
             <Overlay
               source={require("../assets/ReleasesFiller/AlbumOverlay.png")}
             />
-            <Title>{this.props.title}</Title>
-            <Medium>{this.props.medium}</Medium>
+            <Title>{this.props.release.title}</Title>
+            <Medium>{this.props.release.medium}</Medium>
           </Cover>
         </TouchableOpacity>
         <Content>
+          <ButtonWrapper>
+            <ShareButton />
+            <NotificationButton />
+          </ButtonWrapper>
           <TouchableOpacity
             onPress={() => {
-              this.props.navigation.push("Account");
+              this.props.navigation.push("Account", {
+                artist: this.props.release.artist,
+              });
             }}
           >
-            <Avatar image={this.props.avatar} size={100} />
+            <Avatar image={this.props.release.artist.avatar} size={100} />
           </TouchableOpacity>
-          <Artist>{this.props.artist}</Artist>
+          <Artist>{this.props.release.artist.name}</Artist>
         </Content>
-        <ButtonWrapper>
-          <NotificationButton />
-        </ButtonWrapper>
       </Container>
     );
   }
@@ -39,21 +44,24 @@ class ReleaseCard extends React.Component {
 export default ReleaseCard;
 
 const Container = styled.View`
-  height: 100%;
-  width: 75%;
+  height: 75%;
+  width: 100%;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
 `;
 
 const ButtonWrapper = styled.View`
-  width: 60px;
-  height: 60px;
+  flex-direction: row;
+  width: 60%;
+  height: 64px;
+  margin-left: 10%;
+  justify-content: center;
 `;
 
 const Cover = styled.View`
-  width: 160px;
-  height: 160px;
+  width: 200px;
+  height: 200px;
+  margin-left: 20px;
   color: white;
   overflow: hidden;
   justify-content: flex-end;
@@ -90,12 +98,13 @@ const Medium = styled.Text`
 const Content = styled.View`
   align-items: center;
   justify-content: center;
-  width: 50%;
+  width: 40%;
 `;
 
 const Artist = styled.Text`
-  font-size: 12px;
-  font-weight: 400;
-  width: 100px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 140px;
   text-align: center;
+  color: ${colorTheme.mainContent};
 `;

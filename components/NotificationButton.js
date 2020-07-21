@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
+import colorTheme from "../data/colorTheme";
 
 class NotificationButton extends React.Component {
   constructor() {
@@ -26,8 +27,8 @@ class NotificationButton extends React.Component {
                   ? "ios-notifications"
                   : "ios-notifications-outline"
               }
-              size={36}
-              color={this.state.notify ? "#1075b7" : "#cbcbcb"}
+              size={48}
+              color={this.state.notify ? "#1075b7" : colorTheme.midGray}
             />
           </Container>
         </TouchableOpacity>
@@ -40,15 +41,12 @@ export default NotificationButton;
 
 const Wrapper = styled.View`
   height: 100%;
-  width: 100%;
+  width: 50%;
 `;
 
 const Container = styled.View`
-  background: white;
   width: 100%;
   height: 100%;
-  border-radius: 15px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
   align-items: center;
   justify-content: center;
 `;

@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { View, ScrollView } from "react-native";
 import Avatar from "../components/Avatar";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import colorTheme from "../data/colorTheme";
 
 const FavArtists = (props) => (
   <Container>
@@ -14,12 +15,14 @@ const FavArtists = (props) => (
           <ArtistCard key={index}>
             <TouchableOpacity
               onPress={() => {
-                props.navigation.push("Account");
+                props.navigation.push("Account", {
+                  artist: artist.name,
+                });
               }}
             >
-              <Avatar image={artist.image} size={144} />
+              <Avatar image={artist.name.avatar} size={144} />
             </TouchableOpacity>
-            <Artist>{artist.name}</Artist>
+            <Artist>{artist.name.name}</Artist>
           </ArtistCard>
         ))}
       </ArtistsWrapper>
@@ -34,7 +37,7 @@ const Container = styled.View``;
 const Title = styled.Text`
   font-size: 20px;
   font-weight: 800;
-  color: #1b1b1b;
+  color: ${colorTheme.mainContent};
   margin: 20px;
   margin-bottom: 10px;
 `;
@@ -46,6 +49,7 @@ const ArtistsWrapper = styled.View`
 const Artist = styled.Text`
   font-size: 12px;
   font-weight: 800;
+  color: ${colorTheme.mainContent};
 `;
 
 const ArtistCard = styled.View`

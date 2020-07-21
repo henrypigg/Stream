@@ -4,15 +4,13 @@ import ReleaseFilter from "../components/ReleaseFilter";
 import ReleaseCard from "../components/ReleaseCard";
 import {
   ScrollView,
-  SafeAreaView,
   TouchableOpacity,
-  Animated,
-  Easing,
-  StatusBar,
   Platform,
   UIManager,
   LayoutAnimation,
 } from "react-native";
+import releases from "../data/releases";
+import colorTheme from "../data/colorTheme";
 
 class ReleasesView extends React.Component {
   constructor() {
@@ -32,7 +30,16 @@ class ReleasesView extends React.Component {
 
   static navigationOptions = {
     title: "Release Dates",
-    headerTintColor: "#1075b7",
+    headerStyle: {
+      shadowColor: "transparent",
+      height: 100,
+      backgroundColor: colorTheme.bg,
+    },
+    headerTitleStyle: {
+      fontSize: "24",
+      fontWeight: "800",
+      color: colorTheme.mainContent,
+    },
   };
 
   render() {
@@ -44,12 +51,15 @@ class ReleasesView extends React.Component {
           </TouchableOpacity>
           {releases.map((release, index) => (
             <Wrapper key={index}>
+              <DateContainer>
+                <Divider />
+                <Date>
+                  <Number>{release.day}</Number>
+                  <Month>{release.month}</Month>
+                </Date>
+              </DateContainer>
               <ReleaseCard
-                art={release.art}
-                title={release.title}
-                avatar={release.avatar}
-                artist={release.artist}
-                medium={release.medium}
+                release={release}
                 navigation={this.props.navigation}
               />
             </Wrapper>
@@ -63,100 +73,47 @@ class ReleasesView extends React.Component {
 export default ReleasesView;
 
 const Container = styled.View`
-  background-color: #f8f8f8;
+  background-color: ${colorTheme.bg};
+`;
+
+const DateContainer = styled.View`
+  height: 25%;
+  width: 100%;
+  align-items: flex-start;
+  padding-left: 20px;
+  padding-right: 20px;
+`;
+
+const Divider = styled.View`
+  width: 90%;
+  height: 1px;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 10px;
+  background-color: ${colorTheme.midGray};
 `;
 
 const Wrapper = styled.View`
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 180px;
+  height: 330px;
 `;
 
-const releases = [
-  {
-    art: require("../assets/ReleasesFiller/rtj4.png"),
-    avatar: require("../assets/ReleasesFiller/RunTheJewels.png"),
-    artist: "Run the Jewels",
-    title: "RTJ4",
-    medium: "Album",
-  },
-  {
-    art: require("../assets/ReleasesFiller/Artist2Deluxe.png"),
-    avatar: require("../assets/ReleasesFiller/ABoogie.png"),
-    artist: "A Boogie wit da Hoodie",
-    title: "Artist 2.0 (Deluxe)",
-    medium: "Album",
-  },
-  {
-    art: require("../assets/ReleasesFiller/bwu2.png"),
-    avatar: require("../assets/ReleasesFiller/DizzyWright.png"),
-    artist: "Dizzy Wright",
-    title: "Blaze With Us 2",
-    medium: "Album",
-  },
-  {
-    art: require("../assets/ReleasesFiller/ImGone.png"),
-    avatar: require("../assets/ReleasesFiller/IanDior.png"),
-    artist: "Ian Dior",
-    title: "I'm Gone",
-    medium: "Single",
-  },
-  {
-    art: require("../assets/ReleasesFiller/UngodlyHour.png"),
-    avatar: require("../assets/ReleasesFiller/ChloexHalle.png"),
-    artist: "Chloe x Halle",
-    title: "Ungodly Hour",
-    medium: "Album",
-  },
-  {
-    art: require("../assets/ReleasesFiller/TheAlbum.png"),
-    avatar: require("../assets/ReleasesFiller/TeyanaTaylor.png"),
-    artist: "Teyana Taylor",
-    title: "The Album",
-    medium: "Album",
-  },
-  {
-    art: require("../assets/ReleasesFiller/rtj4.png"),
-    avatar: require("../assets/ReleasesFiller/RunTheJewels.png"),
-    artist: "Run the Jewels",
-    title: "RTJ4",
-    medium: "Album",
-  },
-  {
-    art: require("../assets/ReleasesFiller/Artist2Deluxe.png"),
-    avatar: require("../assets/ReleasesFiller/ABoogie.png"),
-    artist: "A Boogie wit da Hoodie",
-    title: "Artist 2.0 (Deluxe)",
-    medium: "Album",
-  },
-  {
-    art: require("../assets/ReleasesFiller/bwu2.png"),
-    avatar: require("../assets/ReleasesFiller/DizzyWright.png"),
-    artist: "Dizzy Wright",
-    title: "Blaze With Us 2",
-    medium: "Album",
-  },
-  {
-    art: require("../assets/ReleasesFiller/ImGone.png"),
-    avatar: require("../assets/ReleasesFiller/IanDior.png"),
-    artist: "Ian Dior",
-    title: "I'm Gone",
-    medium: "Single",
-  },
-  {
-    art: require("../assets/ReleasesFiller/UngodlyHour.png"),
-    avatar: require("../assets/ReleasesFiller/ChloexHalle.png"),
-    artist: "Chloe x Halle",
-    title: "Ungodly Hour",
-    medium: "Album",
-  },
-  {
-    art: require("../assets/ReleasesFiller/TheAlbum.png"),
-    avatar: require("../assets/ReleasesFiller/TeyanaTaylor.png"),
-    artist: "Teyana Taylor",
-    title: "The Album",
-    medium: "Album",
-  },
-];
+const Number = styled.Text`
+  color: #1075b7;
+  font-size: 48px;
+`;
+
+const Month = styled.Text`
+  color: #9b9b9b;
+  font-size: 30px;
+  font-weight: 200;
+`;
+
+const Date = styled.View`
+  align-items: center;
+  justify-content: center;
+  padding-top: 5%;
+  height: 65%;
+`;

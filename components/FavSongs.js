@@ -5,6 +5,7 @@ import { View, ScrollView } from "react-native";
 import AlbumCover from "../components/AlbumCover";
 import Avatar from "../components/Avatar";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import colorTheme from "../data/colorTheme";
 
 const FavSongs = (props) => (
   <Container>
@@ -18,15 +19,21 @@ const FavSongs = (props) => (
             </TouchableOpacity>
             <ArtistWrapper>
               {album.artists.map((artist, index) => (
-                <ArtistCard>
+                <ArtistCard key={index}>
                   <TouchableOpacity
                     onPress={() => {
-                      props.navigation.push("Account");
+                      props.navigation.push("Account", {
+                        artist: artist,
+                      });
                     }}
                   >
-                    <Avatar index={index} size={64} image={artist.avatar} />
+                    <Avatar
+                      index={index}
+                      size={64}
+                      image={artist.name.avatar}
+                    />
                   </TouchableOpacity>
-                  <Artist>{artist.name}</Artist>
+                  <Artist>{artist.name.name}</Artist>
                 </ArtistCard>
               ))}
             </ArtistWrapper>
@@ -68,7 +75,7 @@ const ArtistWrapper = styled.View`
 const Title = styled.Text`
   font-size: 20px;
   font-weight: 800;
-  color: #1b1b1b;
+  color: ${colorTheme.mainContent};
   margin-left: 20px;
   margin-top: 50px;
 `;
@@ -77,4 +84,5 @@ const Artist = styled.Text`
   font-size: 12px;
   font-weight: 800;
   text-align: center;
+  color: ${colorTheme.mainContent};
 `;

@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { TouchableOpacity } from "react-native";
+import ArtistInfo from "../components/ArtistInfo";
 
 const ProfileBackground = (props) => (
   <Container>
@@ -14,9 +16,10 @@ export default ProfileBackground;
 
 const Container = styled.View`
   width: 100%;
-  height: 280px;
+  height: 100%;
   align-items: center;
   position: absolute;
+  justify-content: flex-end;
 `;
 
 const Artist = styled.Image`
@@ -29,6 +32,5 @@ const Artist = styled.Image`
 const Overlay = styled.Image`
   position: absolute;
   width: 100%;
-  height: 100%;
-  top: 0;
+  height: 50%;
 `;

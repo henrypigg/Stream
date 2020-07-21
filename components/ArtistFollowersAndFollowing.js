@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
+import colorTheme from "../data/colorTheme";
 
 const FollowersAndFollowing = (props) => (
   <Container>
@@ -42,10 +43,12 @@ const Wrapper = styled.View`
 `;
 
 const Number = styled.Text`
+  color: ${colorTheme.mainContent};
   font-size: 18px;
   font-weight: 300;
 `;
 
 const Text = styled.Text`
+  color: ${colorTheme.mainContent};
   font-weight: 200;
 `;

@@ -2,52 +2,46 @@ import React from "react";
 import styled from "styled-components";
 import { TouchableOpacity } from "react-native";
 
-const ProfileBackground = (props) => (
+const ProfileTabBar = (props) => (
   <Container>
-    <MyMusicWrapper>
-      <TouchableOpacity>
-        <MyMusic>My Music</MyMusic>
-      </TouchableOpacity>
-    </MyMusicWrapper>
-    <RepostsWrapper>
-      <TouchableOpacity>
-        <Reposts>Reposts</Reposts>
-      </TouchableOpacity>
-    </RepostsWrapper>
+    <AllWrapper>
+      <All>My Music</All>
+      <Underline />
+    </AllWrapper>
+    <TouchableOpacity>
+      <Exclusive>Reposts</Exclusive>
+    </TouchableOpacity>
   </Container>
 );
 
-export default ProfileBackground;
+export default ProfileTabBar;
 
 const Container = styled.View`
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  margin-top: 20px;
-`;
-
-const MyMusicWrapper = styled.View`
-  background-color: #1075b7;
-  height: 36px;
-  width: 120px;
-  margin-left: 20px;
-  margin-right: 20px;
   align-items: center;
   justify-content: center;
-  border-radius: 18px;
 `;
 
-const MyMusic = styled.Text`
+const AllWrapper = styled.View`
+  margin: 20px;
+  align-items: center;
+`;
+
+const All = styled.Text`
   font-size: 18px;
   font-weight: 800;
-  color: #ffffff;
+  color: #1075b7;
 `;
 
-const RepostsWrapper = styled.View``;
-
-const Reposts = styled.Text`
+const Exclusive = styled.Text`
+  margin: 20px;
   font-size: 18px;
   font-weight: 800;
   color: #cbcbcb;
-  margin: 20px;
+`;
+
+const Underline = styled.View`
+  width: 30%;
+  height: 2px;
+  background-color: #1075b7;
 `;
