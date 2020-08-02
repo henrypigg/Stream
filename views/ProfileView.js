@@ -20,6 +20,7 @@ import { connect } from "react-redux";
 import artists from "../data/artists";
 import colorTheme from "../data/colorTheme";
 import { color } from "react-native-reanimated";
+import userData from "../data/userData";
 
 function clamp(num, min, max) {
   return num <= min ? min : num >= max ? max : num;
@@ -90,7 +91,7 @@ class ProfileView extends React.Component {
               marginTop: usernameTopMargin,
             }}
           >
-            henrypigg
+            {userData.username}
           </AnimatedUsername>
         </Wrapper>
         <ScrollView
@@ -117,20 +118,23 @@ class ProfileView extends React.Component {
               marginTop: 250,
             }}
           >
-            <FollowersAndFollowing />
+            <FollowersAndFollowing
+              followers={userData.followers}
+              following={userData.following}
+            />
             <EditProfileButton />
             <ProfileTabBar />
             <MyMusic>
               <FavArtists
-                artists={favoriteArtists}
+                artists={userData.favoriteArtists}
                 navigation={this.props.navigation}
               />
               <FavAlbums
-                albums={favoriteAlbums}
+                albums={userData.favoriteAlbums}
                 navigation={this.props.navigation}
               />
               <FavSongs
-                songs={favoriteSongs}
+                songs={userData.favoriteSongs}
                 navigation={this.props.navigation}
               />
             </MyMusic>
@@ -194,75 +198,3 @@ const Content = styled.View`
   border-top-left-radius: 30px;
   background-color: ${colorTheme.bg};
 `;
-
-const favoriteArtists = [
-  {
-    name: artists.ABoogie,
-  },
-  {
-    name: artists.PoloG,
-  },
-  {
-    name: artists.LilTjay,
-  },
-  {
-    name: artists.KanyeWest,
-  },
-  {
-    name: artists.PlayboiCarti,
-  },
-  {
-    name: artists.JuiceWRLD,
-  },
-  {
-    name: artists.CardiB,
-  },
-];
-
-const favoriteAlbums = [
-  {
-    title: "Kids See Ghosts",
-    image: require("../assets/ProfileFiller/KidsSeeGhosts.png"),
-    artists: [
-      {
-        name: artists.KidCudi,
-      },
-      {
-        name: artists.KanyeWest,
-      },
-    ],
-  },
-  {
-    title: "Acid Rap",
-    image: require("../assets/ProfileFiller/AcidRap.png"),
-    artists: [
-      {
-        name: artists.ChanceTheRapper,
-      },
-    ],
-  },
-];
-
-const favoriteSongs = [
-  {
-    title: "Nothin' at All",
-    image: require("../assets/ProfileFiller/AmerikkasMostBlunted.png"),
-    artists: [
-      {
-        name: artists.Trizz,
-      },
-      {
-        name: artists.Chuuwee,
-      },
-    ],
-  },
-  {
-    title: "Pain 1993",
-    image: require("../assets/ProfileFiller/Pain1993.png"),
-    artists: [
-      {
-        name: artists.PlayboiCarti,
-      },
-    ],
-  },
-];

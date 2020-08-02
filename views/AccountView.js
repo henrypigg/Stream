@@ -103,7 +103,7 @@ class AccountView extends React.Component {
               fans={"3.9M"}
               following={"413"}
             />
-            <FollowSubscribeContainer following={true} />
+            <FollowSubscribeContainer following={true} artist={artist} />
             <Bio>
               *+!:)!!{"\n"}whole * ! *:)lotta red **{"\n"}!++ ++** +:) love !
               lit **!++
@@ -114,21 +114,21 @@ class AccountView extends React.Component {
                 <ImagePost
                   key={index}
                   post={post}
-                  artist={post.artist}
+                  artist={artist}
                   navigation={this.props.navigation}
                 />
               ) : post.type == "video" ? (
                 <VideoPost
                   key={index}
                   post={post}
-                  artist={post.artist}
+                  artist={artist}
                   navigation={this.props.navigation}
                 />
               ) : (
                 <AudioPost
                   key={index}
                   post={post}
-                  artist={post.artist}
+                  artist={artist}
                   navigation={this.props.navigation}
                 />
               )

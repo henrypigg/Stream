@@ -22,6 +22,6 @@ const darkForest = {
   accent: "#ffffff",
 };
 
-const colorTheme = darkMode;
+const colorTheme = lightMode;
 
 export default colorTheme;

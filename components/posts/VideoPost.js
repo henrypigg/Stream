@@ -45,7 +45,7 @@ class VideoPost extends React.Component {
             </Info>
             <TimeBar>
               <ElapsedTime />
-              <Length>0:25</Length>
+              <Length>{this.props.post.length}</Length>
             </TimeBar>
           </Post>
           <SharePostButtons style={{ width: "100%" }} />

@@ -12,6 +12,17 @@ const ArtistInfo = (props) => (
     </CollapsedView>
     <Content>
       <SongsCard>
+        <Ionicons
+          name="md-arrow-dropright-circle"
+          size={28}
+          color="#ffffff"
+          style={{
+            position: "absolute",
+            zIndex: 2,
+            alignSelf: "center",
+            top: 50,
+          }}
+        />
         <Song source={require("../assets/ProfileFiller/Pain1993.png")} />
         <SongTitle>Pain 1993 (with Playboi Carti)</SongTitle>
       </SongsCard>

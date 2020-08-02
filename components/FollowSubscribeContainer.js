@@ -3,21 +3,74 @@ import styled from "styled-components";
 import { Text } from "react-native";
 import { color } from "react-native-reanimated";
 import colorTheme from "../data/colorTheme";
+import userData from "../data/userData";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
-const FollowSubscribeContainer = (props) => (
-  <Container>
-    <FollowButtonContainer following={props.following}>
-      <FollowText following={props.following}>
-        {props.following ? "Following" : "Follow"}
-      </FollowText>
-    </FollowButtonContainer>
-    {props.following && (
-      <SubscribeButtonContainer following={props.following}>
-        <SubscribeText>{props.following ? "Subscribe" : ""}</SubscribeText>
-      </SubscribeButtonContainer>
-    )}
-  </Container>
-);
+class FollowSubscribeContainer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      relationship: 0, // 0 if not following, 1 if following, and 2 if subscribed
+    };
+  }
+
+  componentDidMount() {
+    if (userData.subscribedArtists.includes(this.props.artist.id)) {
+      this.setState({ relationship: 2 });
+    } else if (userData.followingArtists.includes(this.props.artist.id)) {
+      this.setState({ relationship: 1 });
+    }
+  }
+
+  following = () => {
+    if (this.state.relationship >= 1) {
+      return true;
+    }
+    return false;
+  };
+
+  handleFollowClick = () => {
+    if (this.state.relationship >= 1) {
+      this.setState({ relationship: 0 });
+    } else {
+      this.setState({ relationship: 1 });
+    }
+    console.log(this.state.relationship);
+    userData.followingArtists = ["test"];
+    console.log(userData.followingArtists);
+  };
+
+  render() {
+    return (
+      <Container>
+        <FollowButtonContainer following={this.following()}>
+          <TouchableOpacity
+            style={{
+              width: 500,
+              height: "100%",
+              backgroundColor: this.following()
+                ? colorTheme.accentGray
+                : colorTheme.accent,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            onPress={() => this.handleFollowClick()}
+          >
+            <FollowText following={this.following()}>
+              {this.following() ? "Following" : "Follow"}
+            </FollowText>
+          </TouchableOpacity>
+        </FollowButtonContainer>
+        {this.following() && (
+          <SubscribeButtonContainer following={this.following()}>
+            <SubscribeText>{this.following() ? "Subscribe" : ""}</SubscribeText>
+          </SubscribeButtonContainer>
+        )}
+      </Container>
+    );
+  }
+}
 
 export default FollowSubscribeContainer;
 
@@ -36,10 +89,9 @@ const FollowButtonContainer = styled.View`
   border-radius: 15px;
   margin-right: ${(props) => (props.following ? "3%" : "0")};
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
-  background-color: ${(props) =>
-    props.following ? colorTheme.accentGray : colorTheme.accent};
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 `;
 
 const SubscribeButtonContainer = styled.View`
@@ -54,7 +106,7 @@ const SubscribeButtonContainer = styled.View`
 
 const FollowText = styled.Text`
   color: ${(props) =>
-    props.following ? colorTheme.mainContent : colorTheme.mainContent};
+    props.following ? colorTheme.mainContent : colorTheme.bg};
   font-size: 16px;
   font-weight: 300;
 `;

@@ -5,7 +5,7 @@ import ImagePost from "../components/posts/ImagePost";
 import { ScrollView, FlatList } from "react-native-gesture-handler";
 import colorTheme from "../data/colorTheme";
 import posts from "../data/posts";
-import { RefreshControl, ListView } from "react-native";
+import { RefreshControl, ListView, Button } from "react-native";
 import Constants from "expo-constants";
 import VideoPost from "../components/posts/VideoPost";
 import AudioPost from "../components/posts/AudioPost";
@@ -38,7 +38,7 @@ class FeedView extends React.Component {
   }
 
   static navigationOptions = {
-    title: "Subscribed",
+    title: "Explore",
     headerStyle: {
       shadowColor: "transparent",
       height: 100,
@@ -49,7 +49,14 @@ class FeedView extends React.Component {
       fontWeight: "800",
       color: colorTheme.mainContent,
     },
-    headerLeft: <MessageButton />,
+    headerLeft: () => <MessageButton />,
+    headerRight: () => (
+      <Button
+        title={"Following"}
+        color={colorTheme.mainContent}
+        style={{ marginRight: 20, position: "absolute", right: 20 }}
+      />
+    ),
   };
 
   PostType = (props) => {

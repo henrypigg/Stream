@@ -1,5 +1,6 @@
 const artists = {
   RunTheJewels: {
+    id: "runthejewels",
     name: "Run The Jewels",
     avatar: require("../assets/artistPhotos/RunTheJewels/RUNTHEJEWELS.png"),
     cover: require("../assets/artistPhotos/RunTheJewels/runthejewelscover.png"),
@@ -43,6 +44,7 @@ const artists = {
     ],
   },
   ABoogie: {
+    id: "aboogie",
     name: "A Boogie wit da Hoodie",
     avatar: require("../assets/artistPhotos/ABoogie/ABOOGIE.png"),
     cover: require("../assets/artistPhotos/ABoogie/aboogiecover.png"),
@@ -98,6 +100,7 @@ const artists = {
     ],
   },
   DizzyWright: {
+    id: "dizzywright",
     name: "Dizzy Wright",
     avatar: require("../assets/artistPhotos/DizzyWright/DIZZY.png"),
     cover: require("../assets/artistPhotos/DizzyWright/dizzycover.png"),
@@ -141,6 +144,7 @@ const artists = {
     ],
   },
   IannDior: {
+    id: "ianndior",
     name: "iann dior",
     avatar: require("../assets/artistPhotos/IannDior/IANNDIOR.png"),
     cover: require("../assets/artistPhotos/IannDior/ianndiorcover.png"),
@@ -184,6 +188,7 @@ const artists = {
     ],
   },
   CardiB: {
+    id: "cardib",
     name: "Cardi B",
     avatar: require("../assets/artistPhotos/CardiB/CARDIB.png"),
     cover: require("../assets/artistPhotos/CardiB/cardibcover.png"),
@@ -227,6 +232,7 @@ const artists = {
     ],
   },
   TeyanaTaylor: {
+    id: "teyanataylor",
     name: "Teyana Taylor",
     avatar: require("../assets/artistPhotos/TeyanaTaylor/TEYANA.png"),
     cover: require("../assets/artistPhotos/TeyanaTaylor/teyanacover.png"),
@@ -270,6 +276,7 @@ const artists = {
     ],
   },
   PoloG: {
+    id: "polog",
     name: "Polo G",
     avatar: require("../assets/artistPhotos/PoloG/POLOG.png"),
     cover: require("../assets/artistPhotos/PoloG/pologcover.png"),
@@ -313,6 +320,7 @@ const artists = {
     ],
   },
   LilTjay: {
+    id: "liltjay",
     name: "Lil Tjay",
     avatar: require("../assets/artistPhotos/LilTjay/LILTJAY.png"),
     cover: require("../assets/artistPhotos/LilTjay/tjaycover.png"),
@@ -344,6 +352,7 @@ const artists = {
     ],
   },
   KanyeWest: {
+    id: "kanyewest",
     name: "Kanye West",
     avatar: require("../assets/artistPhotos/KanyeWest/KANYE.png"),
     cover: require("../assets/artistPhotos/KanyeWest/kanyecover.png"),
@@ -375,6 +384,7 @@ const artists = {
     ],
   },
   ChanceTheRapper: {
+    id: "chancetherapper",
     name: "Chance the Rapper",
     avatar: require("../assets/artistPhotos/ChanceTheRapper/CHANCE.png"),
     cover: require("../assets/artistPhotos/ChanceTheRapper/chancetherappercover.png"),
@@ -418,6 +428,7 @@ const artists = {
     ],
   },
   Trizz: {
+    id: "trizz",
     name: "Trizz",
     avatar: require("../assets/artistPhotos/Trizz/TRIZZ.png"),
     cover: require("../assets/artistPhotos/Trizz/trizzcover.png"),
@@ -461,6 +472,7 @@ const artists = {
     ],
   },
   Chuuwee: {
+    id: "chuuwee",
     name: "Chuuwee",
     avatar: require("../assets/artistPhotos/Chuuwee/CHUUWEE.png"),
     cover: require("../assets/artistPhotos/Chuuwee/chuuweecover.png"),
@@ -504,6 +516,7 @@ const artists = {
     ],
   },
   JuiceWRLD: {
+    id: "juicewrld",
     name: "Juice WRLD",
     avatar: require("../assets/artistPhotos/JuiceWRLD/JUICEWRLD.png"),
     cover: require("../assets/artistPhotos/JuiceWRLD/juicewrldcover.png"),
@@ -547,6 +560,7 @@ const artists = {
     ],
   },
   PlayboiCarti: {
+    id: "playboicarti",
     name: "Playboi Carti",
     avatar: require("../assets/artistPhotos/PlayboiCarti/PLAYBOI.png"),
     cover: require("../assets/artistPhotos/PlayboiCarti/playboicover.png"),
@@ -590,6 +604,7 @@ const artists = {
     ],
   },
   KidCudi: {
+    id: "kidcudi",
     name: "Kid Cudi",
     avatar: require("../assets/artistPhotos/KidCudi/KIDCUDI.png"),
     cover: require("../assets/artistPhotos/KidCudi/kidcudicover.png"),

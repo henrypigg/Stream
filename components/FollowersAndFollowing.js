@@ -4,17 +4,17 @@ import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import colorTheme from "../data/colorTheme";
 
-const FollowersAndFollowing = () => (
+const FollowersAndFollowing = (props) => (
   <Container>
     <TouchableOpacity>
       <Followers>
-        <Number>74</Number>
+        <Number>{props.followers}</Number>
         <Text>FOLLOWERS</Text>
       </Followers>
     </TouchableOpacity>
     <TouchableOpacity>
       <Following>
-        <Number>95</Number>
+        <Number>{props.following}</Number>
         <Text>FOLLOWING</Text>
       </Following>
     </TouchableOpacity>
