@@ -23,17 +23,17 @@ const Container = styled.View`
 const EditProfile = styled.View`
   width: 90%;
   margin-left: 5%;
-  height: 48px;
+  height: 36px;
   background: ${colorTheme.accentGray};
   border: 0.5px solid ${colorTheme.midGray};
   margin-top: 20px;
   justify-content: center;
   align-items: center;
-  border-radius: 15px;
+  border-radius: 5px;
 `;
 
 const Text = styled.Text`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 300;
   color: ${colorTheme.mainContent};
 `;

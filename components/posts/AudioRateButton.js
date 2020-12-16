@@ -86,7 +86,7 @@ class AudioRateButton extends React.Component {
 export default AudioRateButton;
 
 const Container = styled.View`
-  height: 64px;
+  height: 48px;
   width: 100%;
   flex-direction: row;
   justify-content: center;

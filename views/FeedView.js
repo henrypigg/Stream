@@ -38,9 +38,9 @@ class FeedView extends React.Component {
   }
 
   static navigationOptions = {
-    title: "Explore",
+    title: "Subscribed",
     headerStyle: {
-      shadowColor: "transparent",
+      shadowColor: colorTheme.accentGray,
       height: 100,
       backgroundColor: colorTheme.bg,
     },
@@ -49,14 +49,7 @@ class FeedView extends React.Component {
       fontWeight: "800",
       color: colorTheme.mainContent,
     },
-    headerLeft: () => <MessageButton />,
-    headerRight: () => (
-      <Button
-        title={"Following"}
-        color={colorTheme.mainContent}
-        style={{ marginRight: 20, position: "absolute", right: 20 }}
-      />
-    ),
+    headerRight: () => <MessageButton />,
   };
 
   PostType = (props) => {

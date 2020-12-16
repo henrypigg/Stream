@@ -1,20 +1,44 @@
 import React from "react";
-import { Animated, LayoutAnimation } from "react-native";
+import {
+  Animated,
+  LayoutAnimation,
+  Modal,
+  Alert,
+  View,
+  StyleSheet,
+  Text,
+} from "react-native";
 import styled from "styled-components";
 import ArtistBackground from "../components/ArtistBackground";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import ArtistFollowersAndFollowing from "../components/ArtistFollowersAndFollowing";
-import FollowSubscribeContainer from "../components/FollowSubscribeContainer";
+import SubscribeContainer from "../components/SubscribeContainer";
 import ArtistInfo from "../components/ArtistInfo";
 import ArtistTabBar from "../components/ArtistTabBar";
 import ImagePost from "../components/posts/ImagePost";
 import VideoPost from "../components/posts/VideoPost";
 import AudioPost from "../components/posts/AudioPost";
 import colorTheme from "../data/colorTheme";
+import { BlurView } from "expo-blur";
+import SubscribePopUp from "../components/SubscribePopUp";
+import { connect } from "react-redux";
 
 const MIN_BG_HEIGHT = 280;
 const MAX_BG_HEIGHT = 1000;
 const BG_SCROLL_DISTANCE = MIN_BG_HEIGHT - MAX_BG_HEIGHT;
+
+function mapStateToProps(state) {
+  return { action: state.action, name: state.name };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    openPopUp: () =>
+      dispatch({
+        type: "OPEN_POPUP",
+      }),
+  };
+}
 
 class AccountView extends React.Component {
   constructor(props) {
@@ -23,6 +47,9 @@ class AccountView extends React.Component {
     this.state = {
       scrollY: new Animated.Value(0),
       infoExpanded: false,
+      subscribeVisible: false,
+      scale: new Animated.Value(1),
+      opacity: 1,
     };
 
     if (Platform.OS == "android") {
@@ -30,7 +57,25 @@ class AccountView extends React.Component {
     }
   }
 
-  profileTabSwitch = () => {};
+  componentDidMount() {
+    this.togglePopUp();
+  }
+
+  componentDidUpdate() {
+    this.togglePopUp();
+  }
+
+  togglePopUp = () => {
+    if (this.props.action == "openPopUp") {
+      this.setState({ subscribeVisible: true });
+      Animated.spring(this.state.scale, {
+        toValue: 0.9,
+      }).start();
+    }
+    if (this.props.action == "closePopUp") {
+      this.setState({ subscribeVisible: false });
+    }
+  };
 
   changeLayout = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
@@ -60,8 +105,14 @@ class AccountView extends React.Component {
 
     return (
       <Container>
+        <SubscribePopUp subscribeVisible={this.state.subscribeVisible} />
+
         <AnimatedWrapper
-          style={{ height: ArtistNameHeight, position: "absolute" }}
+          style={{
+            transform: [{ scale: this.state.scale }],
+            height: ArtistNameHeight,
+            position: "absolute",
+          }}
         >
           <ArtistName infoExpanded={this.state.infoExpanded}>
             {artist.name}
@@ -103,7 +154,11 @@ class AccountView extends React.Component {
               fans={"3.9M"}
               following={"413"}
             />
-            <FollowSubscribeContainer following={true} artist={artist} />
+            <SubscribeContainer
+              following={true}
+              artist={artist}
+              openPopUp={this.props.openPopUp}
+            />
             <Bio>
               *+!:)!!{"\n"}whole * ! *:)lotta red **{"\n"}!++ ++** +:) love !
               lit **!++
@@ -140,7 +195,7 @@ class AccountView extends React.Component {
   }
 }
 
-export default AccountView;
+export default connect(mapStateToProps, mapDispatchToProps)(AccountView);
 
 const InfoWrapper = styled.View`
   width: 100%;

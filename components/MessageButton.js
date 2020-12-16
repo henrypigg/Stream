@@ -7,7 +7,11 @@ import colorTheme from "../data/colorTheme";
 const MessageButton = () => (
   <Container>
     <TouchableOpacity>
-      <Ionicons name="md-send" size={28} color={colorTheme.mainContent} />
+      <Ionicons
+        name="ios-paper-plane"
+        size={28}
+        color={colorTheme.mainContent}
+      />
     </TouchableOpacity>
   </Container>
 );
@@ -15,5 +19,5 @@ const MessageButton = () => (
 export default MessageButton;
 
 const Container = styled.View`
-  padding-left: 20px;
+  padding-right: 20px;
 `;

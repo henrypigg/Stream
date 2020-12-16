@@ -97,7 +97,7 @@ const CommentButton = styled.View`
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
   margin: 20px;
   margin-top: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
   justify-content: center;
 `;
 

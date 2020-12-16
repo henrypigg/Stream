@@ -123,7 +123,6 @@ class ProfileView extends React.Component {
               following={userData.following}
             />
             <EditProfileButton />
-            <ProfileTabBar />
             <MyMusic>
               <FavArtists
                 artists={userData.favoriteArtists}

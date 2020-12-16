@@ -26,7 +26,7 @@ const userData = {
       name: artists.JuiceWRLD,
     },
     {
-      name: artists.CardiB,
+      name: artists.Chuuwee,
     },
   ],
   favoriteAlbums: [

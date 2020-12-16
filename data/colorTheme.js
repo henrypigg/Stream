@@ -7,21 +7,13 @@ const lightMode = {
 };
 
 const darkMode = {
-  bg: "#121212",
-  accentGray: "#1b1b1b",
+  bg: "#000000",
+  accentGray: "#121212",
   midGray: "#292929",
   mainContent: "#ffffff",
-  accent: "#1075b7",
+  accent: "#e8b923",
 };
 
-const darkForest = {
-  bg: "#071c04",
-  accentGray: "#170c30",
-  midGray: "#5d3285",
-  mainContent: "#ffffff",
-  accent: "#ffffff",
-};
-
-const colorTheme = lightMode;
+const colorTheme = darkMode;
 
 export default colorTheme;

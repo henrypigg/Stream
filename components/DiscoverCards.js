@@ -45,7 +45,7 @@ const TopRow = styled.View`
 const MapCard = styled.View`
   width: 38%;
   height: 100%;
-  border-radius: 15px;
+  border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
   margin-left: 4%;
   margin-right: 2%;
@@ -78,7 +78,7 @@ const Title = styled.Text`
 const ActivityCard = styled.View`
   width: 48%;
   height: 100%;
-  border-radius: 15px;
+  border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
   margin-left: 2%;
   margin-right: 4%;
@@ -88,7 +88,7 @@ const ActivityCard = styled.View`
 `;
 
 const BottomRow = styled.View`
-  margin-top: 10px;
+  margin-top: 4px;
   flex-direction: row;
   width: 100%;
   height: 45%;
@@ -97,7 +97,7 @@ const BottomRow = styled.View`
 const HashtagCard = styled.View`
   width: 48%;
   height: 100%;
-  border-radius: 15px;
+  border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
   margin-left: 4%;
   margin-right: 2%;
@@ -109,7 +109,7 @@ const HashtagCard = styled.View`
 const ChartsCard = styled.View`
   width: 38%;
   height: 100%;
-  border-radius: 15px;
+  border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
   margin-left: 2%;
   margin-right: 4%;

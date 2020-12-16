@@ -85,7 +85,7 @@ const TrendingSearch = styled.View`
   height: 90%;
   margin-left: 10px;
   max-width: 150px;
-  border-radius: 16px;
+  border-radius: 5px;
   align-items: center;
   justify-content: center;
 `;
@@ -115,7 +115,7 @@ const SearchWrapper = styled.View`
   margin-right: 5%;
   margin-top: 20px;
   height: 48px;
-  border-radius: 15px;
+  border-radius: 5px;
   background-color: ${colorTheme.accentGray};
 `;
 

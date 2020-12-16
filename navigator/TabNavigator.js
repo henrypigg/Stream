@@ -29,10 +29,7 @@ FeedStack.navigationOptions = () => {
       showLabel: false,
       style: {
         backgroundColor: colorTheme.bg, // TabBar background
-        shadowColor: "transparent",
-      },
-      tabBarStyle: {
-        shadowColor: "transparent",
+        shadowColor: colorTheme.accentGray,
       },
     },
   };
@@ -124,7 +121,7 @@ ProfileStack.navigationOptions = {
   tabBarLabel: " ",
   tabBarIcon: ({ focused }) => (
     <Ionicons
-      name="md-musical-note"
+      name="md-person"
       size={32}
       color={focused ? colorTheme.accent : colorTheme.mainContent}
     />
@@ -143,8 +140,6 @@ ProfileStack.navigationOptions = {
 
 const TabNavigator = createBottomTabNavigator({
   FeedStack,
-  ReleasesStack,
-  PostStack,
   DiscoverStack,
   ProfileStack,
 });
